@@ -22,7 +22,7 @@ function pickWords(text: string): string[] {
     .replace(/[^\wàâäéèêëïîôùûüç\s-]/gi, " ")
     .split(/\s+/)
     .filter((w) => w.length >= 5 && !STOP_WORDS.has(w));
-  return [...new Set(words)];
+  return Array.from(new Set(words));
 }
 
 function sentences(text: string): string[] {
