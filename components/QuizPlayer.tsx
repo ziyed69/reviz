@@ -7,14 +7,16 @@ import Link from "next/link";
 type Props = {
   quiz: Quiz;
   onReset?: () => void;
+  onWrong?: (items: { prompt: string; correct: string; chosen?: string }[]) => void;
 };
 
-export function QuizPlayer({ quiz, onReset }: Props) {
+export function QuizPlayer({ quiz, onReset, onWrong }: Props) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
   const [answered, setAnswered] = useState(false);
+  const [wrongs, setWrongs] = useState<{ prompt: string; correct: string; chosen?: string }[]>([]);
 
   const q = quiz.questions[index];
   const progress = ((index + (answered ? 1 : 0)) / quiz.questions.length) * 100;
@@ -23,12 +25,27 @@ export function QuizPlayer({ quiz, onReset }: Props) {
     if (answered) return;
     setSelected(optionIndex);
     setAnswered(true);
-    if (optionIndex === q.correctIndex) setScore((s) => s + 1);
+    if (optionIndex === q.correctIndex) {
+      setScore((s) => s + 1);
+    } else {
+      setWrongs((w) => [
+        ...w,
+        {
+          prompt: q.prompt,
+          correct: q.options[q.correctIndex],
+          chosen: q.options[optionIndex],
+        },
+      ]);
+    }
   }
 
   function next() {
     if (index + 1 >= quiz.questions.length) {
       setDone(true);
+      setWrongs((w) => {
+        onWrong?.(w);
+        return w;
+      });
       return;
     }
     setIndex((i) => i + 1);

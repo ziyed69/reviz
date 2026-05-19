@@ -7,7 +7,8 @@ import {
   validateChatMessage,
   type QuotaAction,
 } from "@/lib/limits";
-import { localStudyPlan, localSummary } from "@/lib/local-fallback";
+import { buildRichSummary } from "@/lib/format-summary";
+import { localStudyPlan } from "@/lib/local-fallback";
 import { generateQuizFromText } from "@/lib/qcm";
 import type { Quiz } from "@/lib/types";
 
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
       case "summary": {
         if (!hasOpenAI()) {
           return jsonWithUsage(
-            { content: localSummary(text, title), mode: "basic" },
+            { content: buildRichSummary(text, title), mode: "basic" },
             gate.usage
           );
         }

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Reviz — IA étudiant : résumé, chat PDF, plan, examens",
+  title: "Reviz AI — Super-app étudiant : révisions, CV, rapport, examens",
   description:
-    "L'IA pour réviser plus vite : résumé de cours, chat avec ton PDF, plan de révision et examens auto.",
+    "Révisions PDF, CV stage, rapport de mémoire, mode crash, prof IA et planning. Gratuit avec quotas — Premium 5€/mois.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
