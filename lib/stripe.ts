@@ -2,8 +2,10 @@ import Stripe from "stripe";
 
 export function getStripe(): Stripe {
   const key = process.env.STRIPE_SECRET_KEY;
+
   if (!key) {
-    throw new Error("STRIPE_SECRET_KEY manquant. Ajoute-le dans .env.local ou Vercel.");
+    throw new Error("STRIPE_SECRET_KEY manquant. Ajoute-le dans Vercel.");
   }
-  return new Stripe(key, { apiVersion: "2024-06-20" });
+
+  return new Stripe(key);
 }
