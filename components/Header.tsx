@@ -5,11 +5,12 @@ export function Header() {
     <header className="site-header container">
       <Link href="/" className="logo">
         Re<span>viz</span>
+        <span className="logo-tag">IA étudiant</span>
       </Link>
-      <nav style={{ display: "flex", gap: "1.25rem" }}>
-        <Link href="/exemple">Exemple</Link>
-        <Link href="/app" className="btn btn-primary" style={{ padding: "0.5rem 1rem" }}>
-          Essayer
+      <nav className="nav-links">
+        <Link href="/exemple">Démo</Link>
+        <Link href="/app" className="btn btn-primary nav-cta">
+          Ouvrir l&apos;app
         </Link>
       </nav>
     </header>

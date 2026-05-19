@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { QuizPlayer } from "@/components/QuizPlayer";
 import { DEMO_QUIZ } from "@/lib/demo-quiz";
@@ -11,20 +12,22 @@ export default function ExemplePage() {
   return (
     <>
       <Header />
-      <main className="container" style={{ padding: "2rem 0 4rem" }}>
-        <h1 style={{ marginBottom: "0.5rem" }}>Démo Reviz</h1>
-        <p style={{ color: "var(--muted)", marginBottom: "2rem" }}>
-          Exemple : chapitre d&apos;algèbre linéaire — 8 questions, sans upload.
-        </p>
+      <main className="container app-main">
+        <p className="badge">Démo</p>
+        <h1>Examen auto — exemple</h1>
+        <p className="app-lead">8 questions d&apos;algèbre linéaire, sans upload.</p>
 
         {!started ? (
           <div className="card" style={{ textAlign: "center" }}>
             <p style={{ marginBottom: "1.5rem" }}>
-              Clique pour lancer le QCM démo comme un vrai utilisateur.
+              Teste l&apos;outil examen comme un vrai utilisateur.
             </p>
             <button type="button" className="btn btn-primary" onClick={() => setStarted(true)}>
-              Générer le QCM démo
+              Lancer la démo
             </button>
+            <p style={{ marginTop: "1.5rem" }}>
+              <Link href="/app">→ Ouvrir l&apos;app complète avec ton PDF</Link>
+            </p>
           </div>
         ) : (
           <QuizPlayer quiz={DEMO_QUIZ} onReset={() => setStarted(false)} />

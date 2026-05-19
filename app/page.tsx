@@ -1,5 +1,29 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { SubscribeButton } from "@/components/SubscribeButton";
+
+const FEATURES = [
+  {
+    emoji: "📄",
+    title: "Résumé de cours",
+    text: "L'essentiel en 2 min : idées clés, définitions, pièges à éviter.",
+  },
+  {
+    emoji: "💬",
+    title: "Chat PDF",
+    text: "Pose des questions sur ton cours — l'IA répond à partir de ton document.",
+  },
+  {
+    emoji: "📅",
+    title: "Plan de révision",
+    text: "Un planning J-7 → jour J généré pour ton examen.",
+  },
+  {
+    emoji: "✅",
+    title: "Examens auto",
+    text: "QCM interactif + score — tu sais où tu en es.",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -7,57 +31,60 @@ export default function HomePage() {
       <Header />
       <main>
         <section className="hero container">
+          <p className="badge">IA étudiant · nouvelle génération</p>
           <h1>
-            Révise 2× plus vite.
+            Révise comme un étudiant
             <br />
-            Sans refaire tes fiches.
+            de 2026.
           </h1>
-          <p>Tu uploades ton cours. On te génère un QCM. Tu révises.</p>
+          <p className="hero-sub">
+            Reviz transforme ton PDF en résumé, chat, plan et examen — sans refaire tes fiches à la main.
+          </p>
           <div className="hero-actions">
             <Link href="/app" className="btn btn-primary">
               Essayer gratuitement
             </Link>
             <Link href="/exemple" className="btn btn-ghost">
-              Voir un exemple
+              Voir la démo
             </Link>
           </div>
         </section>
 
         <section className="section container">
-          <h2>Comment ça marche</h2>
-          <div className="grid-3">
-            <div className="card">
-              <h3>1. Upload</h3>
-              <p style={{ color: "var(--muted)" }}>Dépose ton PDF de cours (texte lisible).</p>
-            </div>
-            <div className="card">
-              <h3>2. Génération</h3>
-              <p style={{ color: "var(--muted)" }}>On extrait l&apos;essentiel et on crée tes questions.</p>
-            </div>
-            <div className="card">
-              <h3>3. Révision</h3>
-              <p style={{ color: "var(--muted)" }}>15 questions QCM — score à la fin.</p>
-            </div>
+          <h2>4 outils. 1 upload.</h2>
+          <div className="grid-4">
+            {FEATURES.map((f) => (
+              <div key={f.title} className="card feature-card">
+                <span className="feature-emoji">{f.emoji}</span>
+                <h3>{f.title}</h3>
+                <p style={{ color: "var(--muted)", fontSize: "0.95rem" }}>{f.text}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="section container">
-          <h2>Tarifs (bientôt actifs)</h2>
+        <section id="tarifs" className="section container">
+          <h2>Tarifs</h2>
           <div className="pricing">
             <div className="card price-card">
               <h3>Gratuit</h3>
               <p className="price">0 €</p>
-              <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>3 cours / mois</p>
+              <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>
+                2 PDF/jour · quotas IA limités
+              </p>
+              <Link href="/app" className="btn btn-ghost" style={{ marginTop: "1rem" }}>
+                Commencer
+              </Link>
             </div>
-            <div className="card price-card">
-              <h3>Examens</h3>
-              <p className="price">9 €</p>
-              <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>/ mois · illimité</p>
-            </div>
-            <div className="card price-card">
-              <h3>Saison</h3>
-              <p className="price">19 €</p>
-              <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>4 mois · illimité</p>
+            <div className="card price-card price-featured">
+              <h3>Reviz Premium</h3>
+              <p className="price">5 €</p>
+              <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>
+                / mois · quotas IA élevés (anti-abus)
+              </p>
+              <div style={{ marginTop: "1rem" }}>
+                <SubscribeButton label="S'abonner — 5 €/mois" />
+              </div>
             </div>
           </div>
         </section>
@@ -65,31 +92,27 @@ export default function HomePage() {
         <section className="section container faq" style={{ maxWidth: 640, margin: "0 auto" }}>
           <h2>FAQ</h2>
           <details>
-            <summary>Est-ce que ça remplace le cours ?</summary>
+            <summary>Comment tu évites le spam / les coûts IA ?</summary>
             <p style={{ marginTop: "0.5rem", color: "var(--muted)" }}>
-              Non — ça t&apos;aide à réviser activement avant l&apos;examen.
+              Limites par jour et par appareil (gratuit : 2 PDF, 12 messages chat, etc.). Premium = plus de crédits. Pause 2 s entre chaque action.
             </p>
           </details>
           <details>
-            <summary>Mes PDF restent privés ?</summary>
+            <summary>Il me faut une clé OpenAI ?</summary>
             <p style={{ marginTop: "0.5rem", color: "var(--muted)" }}>
-              Oui. Traitement sur le serveur, pas revendu. Version beta.
+              Pour le chat et les meilleurs résumés, oui (clé dans Vercel). Sans clé : mode basique + examens locaux.
             </p>
           </details>
           <details>
-            <summary>Quels cours ça marche ?</summary>
+            <summary>Mes PDF sont privés ?</summary>
             <p style={{ marginTop: "0.5rem", color: "var(--muted)" }}>
-              Maths, éco, droit, bio… tout PDF avec du vrai texte (pas un scan flou).
+              Oui. Traitement serveur, pas revendu.
             </p>
           </details>
         </section>
-
-        <p className="container" style={{ textAlign: "center", color: "var(--muted)", paddingBottom: "1rem" }}>
-          Fait par un étudiant en math-info, pour des étudiants qui perdent trop de temps sur les fiches.
-        </p>
       </main>
       <footer className="site-footer">
-        <p>Reviz · Contact : ziyed@reviz.app (à configurer)</p>
+        <p>Reviz — fait par un étudiant, pour les étudiants</p>
       </footer>
     </>
   );

@@ -1,16 +1,17 @@
 import { Header } from "@/components/Header";
-import { AppTool } from "@/components/AppTool";
+import { StudentAI } from "@/components/StudentAI";
 
 export default function AppPage() {
   return (
     <>
       <Header />
-      <main className="container" style={{ padding: "2rem 0 4rem" }}>
-        <h1 style={{ marginBottom: "0.5rem" }}>Génère ton QCM</h1>
-        <p style={{ color: "var(--muted)", marginBottom: "2rem" }}>
-          PDF de cours → questions en quelques secondes.
+      <main className="container app-main">
+        <p className="badge">IA étudiant · nouvelle génération</p>
+        <h1>Ton copilote de révision</h1>
+        <p className="app-lead">
+          Un PDF → résumé, chat, plan et examen. Tout au même endroit.
         </p>
-        <AppTool />
+        <StudentAI />
       </main>
     </>
   );

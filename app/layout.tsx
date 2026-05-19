@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Reviz — PDF de cours → QCM en 2 min",
+  title: "Reviz — IA étudiant : résumé, chat PDF, plan, examens",
   description:
-    "Upload ton cours en PDF, révise avec un QCM généré automatiquement. Gratuit pour tes premiers cours.",
+    "L'IA pour réviser plus vite : résumé de cours, chat avec ton PDF, plan de révision et examens auto.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
